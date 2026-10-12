@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batu Gunting Kertas</title>
+    <style>
+        .choice-button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Permainan <a style="color:red">Batu</a> <a style="color:green">Gunting</a> <a style="color:blue">Kertas</a></h1>
+    <button class="choice-button" onclick="playGame('batu')" style="color:red">Batu</button>
+    <button class="choice-button" onclick="playGame('gunting')" style="color:green">Gunting</button>
+    <button class="choice-button" onclick="playGame('kertas')" style="color:blue">Kertas</button>
+    <h2 id="result"></h2>
+    <script>
+        function playGame(userChoice) {
+            const choices = ['batu', 'gunting', 'kertas'];
+            const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+            const result = determineWinner(userChoice, computerChoice);
+            document.getElementById('result').innerHTML = `
+                Anda memilih: ${userChoice}<br>
+                Komputer memilih: ${computerChoice}<br>
+                ${result}
+            `;
+        }
+
+        function determineWinner(userChoice, computerChoice) {
+            if (userChoice === computerChoice) {
+                return "Hasilnya seri!";
+            } else if (
+                (userChoice === 'batu' && computerChoice === 'gunting') ||
+                (userChoice === 'gunting' && computerChoice === 'kertas') ||
+                (userChoice === 'kertas' && computerChoice === 'batu')
+            ) {
+                return "Anda menang!";
+            } else {
+                return "Komputer menang!";
+            }
+        }
+    </script>
+</body>
+</html>
